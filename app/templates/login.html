@@ -1,0 +1,60 @@
+
+{% extends "base.html" %}
+{% block title %}Login System{% endblock %}
+
+{% block content %}
+<div class="content-section">
+    <form method="POST" action="">
+     {{ form.hidden_tag()   }}
+     <fieldset class="form-group">
+      <legend class="border-bottom mb-4">Einloggen</legend>
+      <div class="form-group">
+        {{ form.email.label(class="form-control-label") }}
+        {% if form.email.errors %}
+        {{ form.email(class="form-control form-control-lg is-invalid") }}
+        <div class="invalid-feedback">
+          {% for error in form.email.errors %}
+              <span>Ungültige E-Mail</span>
+              {% endfor %}
+          {% else %}
+              {{ form.email(class="form-control form-control-lg")}}
+        </div>
+    {% endif %}
+      </div>
+
+      <div class="form-group " >
+        {{ form.password.label(class="form-control-label", placeholder="hi") }}
+        {% if form.password.errors %}
+        {{ form.password(class="form-control form-control-lg is-invalid") }}
+        <div class="invalid-feedback">
+          {% for error in form.password.errors %}
+              <span>Dieses Feld muss zwischen 7 und 20 Zeichen lang sein.</span>
+              {% endfor %}
+          {% else %}
+              {{ form.password(class="form-control form-control-lg")}}
+        </div>
+    {% endif %}
+      </div>
+
+      <div class="form-check konto">
+           {{ form.remember(class="form-check-input") }}
+           {{ form.remember.label(class="form-check-label") }}
+      </div>
+     </fieldset>
+     <div class="form-group">
+         {{ form.submit(class="btn btn-outline-info") }}
+     </div>
+     <div class="konto">
+     <small class="text-muted ml-2">
+         <a href="{{ url_for('reset_request') }}">Passwort vergessen?</a>
+     </small>
+    </div>
+    </form>
+</div>
+<div class="border-top pt-3 konto">
+    <small class="text-muted">
+        ein Konto erstellen?<a class="ml-2" href="{{ url_for('register') }}">Jetzt registrieren</a>
+    </small>
+
+</div>
+{% endblock content %} 
